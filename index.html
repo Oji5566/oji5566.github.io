@@ -774,41 +774,41 @@
 
     .edu-card-image {
       height: 190px;
-      background: linear-gradient(135deg, #1a1a1a 0%, #111111 100%);
       position: relative;
       overflow: hidden;
       display: flex;
-      align-items: flex-end;
-      padding: 20px;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: transparent !important;
+      border-bottom: 1px solid var(--stroke-1);
     }
 
-    .edu-card-image::before {
-      content: '';
-      position: absolute;
-      top: -35%;
-      right: -18%;
-      width: 220px;
-      height: 220px;
-      background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, transparent 65%);
-      border-radius: 50%;
-    }
-
+    .edu-card-image::before,
     .edu-card-image::after {
-      content: '';
-      position: absolute;
-      bottom: -30%;
-      left: -10%;
-      width: 160px;
-      height: 160px;
-      background: radial-gradient(circle, rgba(0,0,0,0.12) 0%, transparent 70%);
-      border-radius: 50%;
+      display: none !important;
+      content: none !important;
     }
 
     .edu-card-image-icon {
-      font-size: 2.2rem;
-      color: rgba(255, 255, 255, 0.45);
-      position: relative;
-      z-index: 1;
+      display: none !important;
+    }
+
+    .edu-card-image-frame {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .edu-card-image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
     }
 
     .edu-card-body {
@@ -837,6 +837,31 @@
       color: #2a2a2a;
       font-size: 0.875rem;
       line-height: 1.65;
+    }
+
+    .edu-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .edu-points li {
+      position: relative;
+      padding-left: 14px;
+      color: #2a2a2a;
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+
+    .edu-points li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #5c5c5c;
     }
 
     /* ===========================
@@ -899,11 +924,59 @@
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0,0,0,0.08);
     }
 
+    
     .work-card-image {
       height: 160px;
       position: relative;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, #f8f8f6 0%, #ecece8 100%);
     }
+
+    .work-card-image-bg {
+      position: absolute;
+      inset: -10px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      filter: blur(22px) saturate(1.02);
+      transform: scale(1.12);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .work-card-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0.06) 100%);
+      pointer-events: none;
+    }
+
+    .work-card-image-frame {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: transparent;
+      z-index: 1;
+    }
+
+    .work-card-image-frame img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
 
     .work-card-tag {
       position: absolute;
@@ -919,6 +992,7 @@
       -webkit-backdrop-filter: blur(6px);
       letter-spacing: 0.04em;
       text-transform: uppercase;
+      z-index: 2;
     }
 
     .work-card-body {
@@ -935,11 +1009,15 @@
     }
 
     .work-card-highlights {
-      font-style: italic;
-      color: #111111;
-      font-size: 0.78rem;
+      color: #6a6a6a;
+      font-size: 0.76rem;
+      line-height: 1.4;
       margin-bottom: 14px;
       font-weight: 400;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .work-card-arrow {
@@ -1042,74 +1120,87 @@
 
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 18px;
-      max-width: 1360px;
+      grid-template-columns: repeat(5, minmax(160px, 1fr));
+      gap: 36px;
+      max-width: 1160px;
       margin: 0 auto;
     }
 
-        .skill-icon {
-      min-height: 230px;
-      border-radius: var(--radius-lg);
+    .skill-icon {
+      border-radius: 20px;
       display: flex;
       flex-direction: column;
       align-items: stretch;
       justify-content: flex-start;
-      background: var(--surface-1);
-      border: 1px solid var(--stroke-1);
-      box-shadow: var(--shadow-1);
+      background: #ffffff;
+      border: none;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.03);
       padding: 0;
       gap: 0;
       overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
     }
 
-        .skill-icon:hover {
-      transform: translateY(-7px);
-      box-shadow: var(--shadow-2);
+    .skill-icon:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 34px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.05);
     }
 
-        .skill-icon-tile {
+    .skill-icon-tile {
       width: 100%;
-      height: 132px;
-      border-radius: 0;
-      background: linear-gradient(180deg, #f8f8f6 0%, #ecece8 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #111111;
-      border-bottom: 1px solid var(--stroke-1);
-      box-shadow: none;
+      aspect-ratio: 1 / 1;
+      display: block;
       flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+      background: transparent;
+      border: none;
     }
 
-        .skill-icon-abbr {
-      font-size: 1.75rem;
-      font-weight: 500;
+    .skill-icon-media {
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: transparent;
+      border: none;
+      overflow: hidden;
+    }
+
+    .skill-icon-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .skill-icon-body {
+      min-height: 80px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 13px 15px 15px;
+      gap: 4px;
+    }
+
+    .skill-icon-title {
+      font-family: 'Radley', serif;
+      font-size: 0.97rem;
+      line-height: 1.18;
       color: #111111;
-      line-height: 1;
-      font-family: 'Inter', sans-serif;
-      letter-spacing: -0.02em;
     }
 
-    .skill-icon-name {
-      font-size: 0.92rem;
-      font-weight: 400;
-      color: #4b4b4b;
-      text-align: center;
-      font-family: 'Inter', sans-serif;
-      letter-spacing: 0;
-    }
-
-        /* keep all tool cards on the same neutral top-surface treatment */
-    .skill-canva, .skill-an, .skill-ai, .skill-ps, .skill-pr,
-    .skill-m365, .skill-davinci, .skill-github, .skill-figma, .skill-notion {
-      background: var(--surface-1);
-    }
-
-    .skill-notion .skill-icon-abbr,
-    .skill-notion .skill-icon-name {
-      color: #111111;
+    .skill-icon-meta {
+      font-size: 0.76rem;
+      line-height: 1.4;
+      color: #6a6a6a;
+      font-style: italic;
     }
 
     /* ===========================
@@ -1277,18 +1368,27 @@
       background: linear-gradient(135deg, #1a1a1a, #111111);
     }
 
-    .modal-image-slide {
+    .modal-image-display-frame {
       position: absolute;
       inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity 0.45s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: transparent;
+      z-index: 1;
+      padding: 0;
     }
 
-    .modal-image-slide.active {
-      opacity: 1;
+    .modal-image-display-media {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      position: relative;
+      z-index: 1;
     }
 
     .modal-img-btn {
@@ -1555,7 +1655,7 @@
       .profile-copy-inner { left: 0; }
       .profile-copy-inner { margin-left: 0; }
       .education-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
-      .skills-grid { max-width: 560px; }
+      .skills-grid { max-width: 900px; grid-template-columns: repeat(4, minmax(140px, 1fr)); gap: 24px; }
     }
 
     @media (max-width: 600px) {
@@ -1577,13 +1677,15 @@
       #home { padding: 126px 20px 76px; }
       #works .section-heading { padding-left: 20px; padding-right: 20px; }
       .carousel-controls { padding-right: 20px; justify-content: center; }
-      .skills-grid { max-width: 100%; gap: 14px; }
-      .skill-icon { min-height: 196px; }
-      .skill-icon-tile { height: 104px; }
-      .skill-icon-name { display: block; font-size: 0.88rem; padding: 14px 14px 16px; }
-      .skill-icon-abbr { font-size: 1.45rem; }
+      .skills-grid { max-width: 100%; grid-template-columns: repeat(2, minmax(112px, 1fr)); gap: 14px; }
+      .skill-icon { border-radius: 15px; }
+      .skill-icon-body { min-height: 68px; padding: 10px 11px 12px; }
+      .skill-icon-title { font-size: 0.84rem; }
+      .skill-icon-meta { font-size: 0.68rem; }
       .modal-content { padding: 24px 22px 28px; }
-    }</style>
+    }
+
+</style>
 </head>
 <body>
 
@@ -1647,32 +1749,43 @@
     <div class="education-grid">
       <div class="edu-card animate-on-scroll" style="transition-delay:0s;">
         <div class="edu-card-image">
-          <i class="fas fa-graduation-cap edu-card-image-icon"></i>
+          <div class="edu-card-image-frame"><img src="edu1.png" alt="Education image 1"></div>
         </div>
         <div class="edu-card-body">
-          <div class="edu-uni">University of Auckland</div>
+          <div class="edu-uni">Durham University</div>
           <div class="edu-degree">Exchange Student, Department of Management &amp; Marketing</div>
-          <p class="edu-desc">Immersed in a vibrant multicultural environment, gaining global perspectives on marketing strategy, consumer behaviour, and international business practices in the Pacific Rim.</p>
+          <ul class="edu-points">
+            <li>Achieved a distinction-level average across coursework</li>
+            <li>Marketing Officer for PalTV, Durham&rsquo;s award-winning student TV station</li>
+          </ul>
         </div>
       </div>
       <div class="edu-card animate-on-scroll" style="transition-delay:0.12s;">
         <div class="edu-card-image" style="background: linear-gradient(135deg, #B07040 0%, #6B2F0E 100%);">
-          <i class="fas fa-graduation-cap edu-card-image-icon"></i>
+          <div class="edu-card-image-frame"><img src="edu2.png" alt="Education image 2"></div>
         </div>
         <div class="edu-card-body">
-          <div class="edu-uni">National Taiwan University</div>
+          <div class="edu-uni">National Sun Yat-sen University</div>
           <div class="edu-degree">Master of Business Administration in International Business</div>
-          <p class="edu-desc">Advanced study in international business strategy, cross-cultural management, and global market analysis at one of Asia's most prestigious universities.</p>
+          <ul class="edu-points">
+            <li>GPA: 4.21 / 4.3</li>
+            <li>Winner of Hult Prize OnCampus at NSYSU 2024</li>
+          </ul>
         </div>
       </div>
       <div class="edu-card animate-on-scroll" style="transition-delay:0.24s;">
         <div class="edu-card-image" style="background: linear-gradient(135deg, #111111 0%, #111111 100%);">
-          <i class="fas fa-graduation-cap edu-card-image-icon"></i>
+          <div class="edu-card-image-frame"><img src="edu3.png" alt="Education image 3"></div>
         </div>
         <div class="edu-card-body">
-          <div class="edu-uni">National Cheng Kung University</div>
+          <div class="edu-uni">National Pingtung University</div>
           <div class="edu-degree">Bachelor of Arts, English</div>
-          <p class="edu-desc">Developed strong communication, critical thinking, and analytical abilities through a rigorous liberal arts curriculum with a focus on literature, linguistics, and intercultural competency.</p>
+          <ul class="edu-points">
+            <li>GPA: 4.0 / 4.0; graduated first in class</li>
+            <li>Eight-time Academic Achievement Award recipient</li>
+            <li>Co-wrote and performed in an original stage production</li>
+            <li>Trained Teacher of Chinese as a Foreign Language</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -1714,16 +1827,16 @@
   <section id="skills">
     <h2 class="section-heading animate-on-scroll">Skills &amp; Tools</h2>
     <div class="skills-grid animate-on-scroll" style="transition-delay:0.1s;">
-      <div class="skill-icon"><div class="skill-icon-tile"><span class="skill-icon-abbr">Ca</span></div><span class="skill-icon-name">Canva</span></div>
-      <div class="skill-icon"><div class="skill-icon-tile"><span class="skill-icon-abbr">Ai</span></div><span class="skill-icon-name">Airtable</span></div>
-      <div class="skill-icon"><div class="skill-icon-tile"><span class="skill-icon-abbr">Il</span></div><span class="skill-icon-name">Illustrator</span></div>
-      <div class="skill-icon"><div class="skill-icon-tile"><span class="skill-icon-abbr">Ph</span></div><span class="skill-icon-name">Photoshop</span></div>
-      <div class="skill-icon"><div class="skill-icon-tile"><span class="skill-icon-abbr">Pr</span></div><span class="skill-icon-name">Premiere Pro</span></div>
-      <div class="skill-icon"><div class="skill-icon-tile"><span class="skill-icon-abbr">Mi</span></div><span class="skill-icon-name">Microsoft 365</span></div>
-      <div class="skill-icon"><div class="skill-icon-tile"><span class="skill-icon-abbr">Ca</span></div><span class="skill-icon-name">CapCut</span></div>
-      <div class="skill-icon"><div class="skill-icon-tile"><span class="skill-icon-abbr">Fi</span></div><span class="skill-icon-name">Figma</span></div>
-      <div class="skill-icon"><div class="skill-icon-tile"><span class="skill-icon-abbr">Gi</span></div><span class="skill-icon-name">GitHub</span></div>
-      <div class="skill-icon"><div class="skill-icon-tile"><span class="skill-icon-abbr">Da</span></div><span class="skill-icon-name">DaVinci Resolve</span></div>
+      <div class="skill-icon skill-canva"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon1.png" alt="Canva app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title">Canva</div><div class="skill-icon-meta">Design platform</div></div></div>
+      <div class="skill-icon skill-affinity"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon2.png" alt="Affinity Suite app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title">Affinity Suite</div><div class="skill-icon-meta">Creative suite</div></div></div>
+      <div class="skill-icon skill-illustrator"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon3.png" alt="Illustrator app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title">Illustrator</div><div class="skill-icon-meta">Vector design</div></div></div>
+      <div class="skill-icon skill-photoshop"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon4.png" alt="Photoshop app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title">Photoshop</div><div class="skill-icon-meta">Image editing</div></div></div>
+      <div class="skill-icon skill-premiere"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon5.png" alt="Premiere Pro app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title">Premiere Pro</div><div class="skill-icon-meta">Video editing</div></div></div>
+      <div class="skill-icon skill-m365"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon6.png" alt="Microsoft 365 app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title" >Microsoft 365 (Office)</div><div class="skill-icon-meta">Productivity suite</div></div></div>
+      <div class="skill-icon skill-meta"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon7.png" alt="Meta Business Suite app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title">Meta Business Suite</div><div class="skill-icon-meta">Social media management</div></div></div>
+      <div class="skill-icon skill-hootsuite"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon8.png" alt="Hootsuite app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title">Hootsuite</div><div class="skill-icon-meta">Social media analytics</div></div></div>
+      <div class="skill-icon skill-github"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon9.png" alt="GitHub app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title">GitHub</div><div class="skill-icon-meta">Vibecoding and hosting</div></div></div>
+      <div class="skill-icon skill-davinci"><div class="skill-icon-tile"><div class="skill-icon-media"><img class="skill-icon-image" src="icon10.png" alt="DaVinci Resolve app icon placeholder"></div></div><div class="skill-icon-body"><div class="skill-icon-title">DaVinci Resolve</div><div class="skill-icon-meta">Video editing</div></div></div>
     </div>
   </section>
 
@@ -1743,6 +1856,7 @@
       </div>
     </div>
   </section>
+
 
   <!-- ===========================
        MODAL
@@ -1766,6 +1880,9 @@
 
       <!-- Modal Image Carousel -->
       <div class="modal-image-carousel" id="modal-image-carousel">
+        <div class="modal-image-display-frame">
+          <img class="modal-image-display-media" id="modal-image-display" alt="">
+        </div>
         <button class="modal-img-btn modal-img-btn-prev" id="modal-img-prev" aria-label="Previous image">
           <i class="fas fa-chevron-left"></i>
         </button>
@@ -1793,122 +1910,212 @@
     const projects = [
       {
         id: 1,
-        title: "Brand Identity Redesign",
-        tag: "Branding",
+        title: "Intern Roundtable Recruitment Video",
+        tag: "Video",
         tagColor: "#111111",
         gradientA: "#2a2a2a",
         gradientB: "#000000",
-        description: "A comprehensive brand identity redesign for a fast-growing tech startup entering international markets. The challenge: create a cohesive, flexible visual system that transcends cultural boundaries while remaining distinctly authentic. The resulting identity balances modern minimalism with warm, human touches that resonate across demographics.",
+        description: "Co-led and produced an Intern Roundtable video project designed to support recruitment for the next intern cohort. Worked with fellow interns to shape the concept, coordinate production, and deliver a polished piece that communicated the intern experience in an engaging and authentic way.",
         highlights: [
-          "Developed a complete visual identity system encompassing 40+ brand assets",
-          "Increased aided brand recognition by 35% within six months of launch",
-          "Delivered an 80-page brand guidelines document adopted across 12 offices",
-          "Coordinated creative delivery across cross-functional teams on 3 continents"
+          "10K+ reach and 700+ engagements",
+          "Co-led concept development and production with a cross-intern team",
+          "Helped drive stronger applicant interest than the previous cycle",
+          "Cited by multiple candidates during the interview process"
         ],
+        coverImage: "p1-0.png",
         images: [
-          "https://placehold.co/700x400/C4956A/FFF?text=Brand+Identity+%E2%80%94+Overview",
-          "https://placehold.co/700x400/8B4513/FFF?text=Brand+Identity+%E2%80%94+System",
-          "https://placehold.co/700x400/A0522D/FFF?text=Brand+Identity+%E2%80%94+Applications"
+          "p1-1.png",
+          "p1-2.png",
+          "p1-3.png"
         ]
       },
       {
         id: 2,
-        title: "E-Commerce UX Overhaul",
-        tag: "UX Design",
-        tagColor: "#111111",
-        gradientA: "#2a2a2a",
-        gradientB: "#000000",
-        description: "A full UX overhaul for a major e-commerce platform struggling with high cart abandonment and low mobile conversion rates. Through intensive user research, journey mapping, and iterative prototyping, the redesign transformed the shopping experience from frustrating to genuinely delightful — driving measurable business impact.",
-        highlights: [
-          "Reduced checkout abandonment rate by 28% through a streamlined purchase flow",
-          "Conducted 24 in-depth user interviews and 3 rounds of usability testing",
-          "Redesigned mobile-first experience now serving 500K+ monthly active users",
-          "Delivered interactive Figma prototype with 120+ connected screens and edge cases"
-        ],
-        images: [
-          "https://placehold.co/700x400/1A7A6E/FFF?text=UX+Design+%E2%80%94+Research",
-          "https://placehold.co/700x400/0D5E55/FFF?text=UX+Design+%E2%80%94+Wireframes",
-          "https://placehold.co/700x400/3DADA0/FFF?text=UX+Design+%E2%80%94+Final+UI"
-        ]
-      },
-      {
-        id: 3,
-        title: "Motion Campaign Series",
-        tag: "Motion",
-        tagColor: "#111111",
-        gradientA: "#2a2a2a",
-        gradientB: "#000000",
-        description: "A dynamic motion design campaign series created for a lifestyle brand's annual product launch. Each piece was crafted to evoke energy and aspiration across Instagram, TikTok, and YouTube — maintaining brand consistency while maximising platform-native appeal through bespoke animation and sound design.",
-        highlights: [
-          "Produced 12 motion graphics generating over 2 million combined impressions",
-          "Achieved a 4.2% engagement rate vs. the 1.8% industry benchmark",
-          "Delivered the full campaign in under 3 weeks from brief to final deliverables",
-          "Won regional creative excellence award for animated storytelling and direction"
-        ],
-        images: [
-          "https://placehold.co/700x400/7B1FA2/FFF?text=Motion+%E2%80%94+Concept",
-          "https://placehold.co/700x400/4A0072/FFF?text=Motion+%E2%80%94+Storyboards",
-          "https://placehold.co/700x400/9C27B0/FFF?text=Motion+%E2%80%94+Final+Reels"
-        ]
-      },
-      {
-        id: 4,
-        title: "Consumer Insights Report",
-        tag: "Research",
-        tagColor: "#111111",
-        gradientA: "#2a2a2a",
-        gradientB: "#000000",
-        description: "A deep-dive consumer insights project commissioned by a regional FMCG company to understand shifting post-pandemic purchasing behaviours. Combining quantitative surveys with qualitative ethnographic studies, the project delivered a nuanced, actionable picture of evolving consumer values and category expectations.",
-        highlights: [
-          "Synthesised data from 1,200+ survey respondents across 5 distinct markets",
-          "Identified 3 untapped consumer micro-segments representing $40M+ annual opportunity",
-          "Delivered a 60-page strategic report with prioritised, board-ready recommendations",
-          "Research findings directly shaped the product roadmap for the following 18 months"
-        ],
-        images: [
-          "https://placehold.co/700x400/1565C0/FFF?text=Research+%E2%80%94+Methodology",
-          "https://placehold.co/700x400/0D47A1/FFF?text=Research+%E2%80%94+Findings",
-          "https://placehold.co/700x400/1E88E5/FFF?text=Research+%E2%80%94+Recommendations"
-        ]
-      },
-      {
-        id: 5,
-        title: "Portfolio Website Redesign",
-        tag: "Web",
-        tagColor: "#111111",
-        gradientA: "#2a2a2a",
-        gradientB: "#000000",
-        description: "A personal portfolio website redesign focused on an immersive, narrative-driven experience that showcases work in rich context. The design language draws from editorial print aesthetics, combining warm typographic composition with bold visual hierarchy to create a memorable showcase that converts visitors into collaborators.",
-        highlights: [
-          "Designed and developed a bespoke single-page portfolio site entirely from scratch",
-          "Achieved a perfect 100/100 Lighthouse performance and accessibility scores",
-          "Implemented silky-smooth scroll animations and CSS-driven micro-interactions",
-          "Increased inbound recruiter inquiries by 60% in the first month after launch"
-        ],
-        images: [
-          "https://placehold.co/700x400/C2185B/FFF?text=Web+%E2%80%94+Design+System",
-          "https://placehold.co/700x400/880E4F/FFF?text=Web+%E2%80%94+Sections",
-          "https://placehold.co/700x400/E91E63/FFF?text=Web+%E2%80%94+Interactions"
-        ]
-      },
-      {
-        id: 6,
-        title: "360° Marketing Campaign",
+        title: "Cybersecurity Awareness Comic Series",
         tag: "Campaign",
         tagColor: "#111111",
         gradientA: "#2a2a2a",
         gradientB: "#000000",
-        description: "A fully integrated 360° marketing campaign for a lifestyle brand's entry into Southeast Asia. The campaign wove together digital advertising, social activations, influencer partnerships, OOH placements, and PR into a single cohesive narrative that resonated deeply with the target audience and drove exceptional business results.",
+        description: "Created a mascot-led comic series for PD’s cybersecurity awareness campaign, combining generative AI tools with careful creative direction to produce content that felt polished, original, and audience-friendly. The series helped make a technical topic more approachable and engaging.",
         highlights: [
-          "Orchestrated simultaneous activation across 8 channels and 4 countries",
-          "Generated $1.2M in attributed revenue within 90 days of campaign launch",
-          "Built and managed a creative team of 6 across two time zones and 3 agencies",
-          "Recognised as 'Best Integrated Campaign of the Year' by regional industry peers"
+          "Nearly 3K reactions per post",
+          "Developed a recurring comic format centered on the office mascot",
+          "Used generative AI thoughtfully to support creative direction",
+          "Turned a technical topic into accessible, engaging content"
         ],
+        coverImage: "p2-0.png",
         images: [
-          "https://placehold.co/700x400/C84B00/FFF?text=Campaign+%E2%80%94+Strategy",
-          "https://placehold.co/700x400/903200/FFF?text=Campaign+%E2%80%94+Creatives",
-          "https://placehold.co/700x400/FF6D00/FFF?text=Campaign+%E2%80%94+Results"
+          "p2-1.png",
+          "p2-2.png",
+          "p2-3.png"
+        ]
+      },
+      {
+        id: 3,
+        title: "Gen Alpha Slang Campaign",
+        tag: "Social Media",
+        tagColor: "#111111",
+        gradientA: "#2a2a2a",
+        gradientB: "#000000",
+        description: "Developed a youth-oriented social campaign using Gen Alpha slang and the office mascot to connect with younger audiences in a playful, platform-native way. Though built around one post, the campaign involved multiple bespoke visuals and a tailored creative approach.",
+        highlights: [
+          "Most-shared Instagram post of the year",
+          "Created a culturally current campaign aimed at younger audiences",
+          "Designed multiple custom assets and supporting visuals",
+          "Generated 200+ shares on AIT’s Instagram"
+        ],
+        coverImage: "p3-0.png",
+        images: [
+          "p3-1.png",
+          "p3-2.png",
+          "p3-3.png"
+        ]
+      },
+      {
+        id: 4,
+        title: "Dragon Boat Race Teaser Reel",
+        tag: "Video",
+        tagColor: "#111111",
+        gradientA: "#2a2a2a",
+        gradientB: "#000000",
+        description: "Produced teaser reel content for the Dragon Boat Race that gained strong traction across platforms and was shared by the host city government. The piece expanded visibility beyond AIT’s own audience and became one of the standout social posts of the year.",
+        highlights: [
+          "37K Facebook views and city-government repost",
+          "Produced teaser content for a major public-facing cultural event",
+          "Became one of the most popular posts on AIT/K’s Instagram",
+          "Delivered record Instagram video reach at the time"
+        ],
+        coverImage: "p4-0.png",
+        images: [
+          "p4-1.png",
+          "p4-2.png",
+          "p4-3.png"
+        ]
+      },
+      {
+        id: 5,
+        title: "PalTV Vox Pop Reel Series",
+        tag: "Video",
+        tagColor: "#111111",
+        gradientA: "#2a2a2a",
+        gradientB: "#000000",
+        description: "As Marketing Officer and Editor for PalTV, coordinated with production teams and student leadership to edit, publish, and promote student media projects. Produced a series of five street-interview reels built around original questions, strong pacing, and clear visual identity.",
+        highlights: [
+          "Produced and promoted 5 original vox-pop reels",
+          "Developed original questions and audience-friendly content concepts",
+          "Edited with custom visual overlays and original title sequences",
+          "Coordinated publishing and promotion with student leadership"
+        ],
+        coverImage: "p5-0.png",
+        images: [
+          "p5-1.png",
+          "p5-2.png",
+          "p5-3.png"
+        ]
+      },
+      {
+        id: 6,
+        title: "Tripal – Hult Prize Winning Pitch",
+        tag: "Strategy",
+        tagColor: "#111111",
+        gradientA: "#2a2a2a",
+        gradientB: "#000000",
+        description: "Worked with an international team to develop and pitch Tripal, a community-focused virtual tour-guiding service, winning Hult Prize OnCampus at NSYSU 2024. The project combined business strategy, problem solving, and collaborative storytelling in a competitive startup environment.",
+        highlights: [
+          "Winner, Hult Prize OnCampus at NSYSU 2024",
+          "Co-developed a community-focused virtual tour service concept",
+          "Refined the business model and presentation with an international team",
+          "Delivered a successful pitch in a competitive startup setting"
+        ],
+        coverImage: "p6-0.png",
+        images: [
+          "p6-1.png",
+          "p6-2.png",
+          "p6-3.png"
+        ]
+      },
+      {
+        id: 7,
+        title: "American Corner Visual Display System",
+        tag: "Visual Design",
+        tagColor: "#111111",
+        gradientA: "#2a2a2a",
+        gradientB: "#000000",
+        description: "Curated themed book displays for American Corner, creating a consistent visual identity across digital and physical formats. The work combined visual organization, print support, and interactive elements to make the displays more engaging and cohesive.",
+        highlights: [
+          "Built a consistent digital and physical display identity",
+          "Curated themed displays for a public-facing cultural space",
+          "Created supporting print collateral and interactive elements",
+          "Turned routine displays into more engaging audience experiences"
+        ],
+        coverImage: "p7-0.png",
+        images: [
+          "p7-1.png",
+          "p7-2.png",
+          "p7-3.png"
+        ]
+      },
+      {
+        id: 8,
+        title: "July Fourth Reception Visuals",
+        tag: "Event Design",
+        tagColor: "#111111",
+        gradientA: "#2a2a2a",
+        gradientB: "#000000",
+        description: "Supported a July Fourth reception by preparing end-to-end visuals and presentation materials that contributed to the event’s overall flow and presentation quality. Helped create a polished guest-facing experience through coordinated event visuals.",
+        highlights: [
+          "End-to-end visuals for a high-profile reception",
+          "Prepared presentation and visual materials for a formal public event",
+          "Supported the guest experience through clear visual coordination",
+          "Delivered polished event-facing assets under real-world deadlines"
+        ],
+        coverImage: "p8-0.png",
+        images: [
+          "p8-1.png",
+          "p8-2.png",
+          "p8-3.png"
+        ]
+      },
+      {
+        id: 9,
+        title: "Social Media Performance Reporting",
+        tag: "Analytics",
+        tagColor: "#111111",
+        gradientA: "#2a2a2a",
+        gradientB: "#000000",
+        description: "Monitored audience engagement and produced accessible social media performance reports to help inform strategy. Translated platform data into clear insights that supported more informed decisions around content direction and campaign planning.",
+        highlights: [
+          "Turned engagement data into actionable content insights",
+          "Tracked audience performance across social platforms",
+          "Produced reports that made data easy to understand and act on",
+          "Supported future content and campaign planning with clear analysis"
+        ],
+        coverImage: "p9-0.png",
+        images: [
+          "p9-1.png",
+          "p9-2.png",
+          "p9-3.png"
+        ]
+      },
+      {
+        id: 10,
+        title: "International Boba Day Reel",
+        tag: "Social Media",
+        tagColor: "#111111",
+        gradientA: "#2a2a2a",
+        gradientB: "#000000",
+        description: "Contributed to concept brainstorming and production support for a Boba Day reel created to connect with Taiwanese audiences through a culturally resonant, highly shareable idea. The campaign delivered exceptional results and became one of the strongest-performing pieces in account history.",
+        highlights: [
+          "219K reach and 14.6K interactions",
+          "Supported concept development and production for a culturally targeted campaign",
+          "Generated 230K+ views and 14.1K likes and reactions",
+          "Became one of the strongest-performing posts in account history"
+        ],
+        coverImage: "p10-0.png",
+        images: [
+          "p10-1.png",
+          "p10-2.png",
+          "p10-3.png"
         ]
       }
     ];
@@ -1924,11 +2131,15 @@
       card.setAttribute('aria-label', 'View project: ' + project.title);
       card.innerHTML =
         '<div class="work-card-image" style="background:linear-gradient(140deg,' + project.gradientA + ',' + project.gradientB + ');">' +
+          '<div class="work-card-image-bg" style="background-image:url(&quot;' + (project.coverImage || project.images[0]) + '&quot;);"></div>' +
+          '<div class="work-card-image-frame">' +
+            '<img src="' + (project.coverImage || project.images[0]) + '" alt="' + project.title + ' preview">' +
+          '</div>' +
           '<span class="work-card-tag">' + project.tag + '</span>' +
         '</div>' +
         '<div class="work-card-body">' +
           '<div class="work-card-title">' + project.title + '</div>' +
-          '<div class="work-card-highlights">' + project.highlights.length + ' Key Highlights</div>' +
+          '<div class="work-card-highlights"># ' + (project.highlights[0] || '') + '</div>' +
           '<div class="work-card-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></div>' +
         '</div>';
       card.addEventListener('click', function() { openModal(project.id); });
@@ -1940,7 +2151,7 @@
     var track2 = document.getElementById('carousel-track-2');
     var projectsReversed = projects.slice().reverse();
 
-    // Row 1: projects 1–6 twice
+    // Row 1: all projects twice
     projects.concat(projects).forEach(function(p) { track1.appendChild(createCard(p)); });
     // Row 2: reversed projects twice (for visual variety)
     projectsReversed.concat(projectsReversed).forEach(function(p) { track2.appendChild(createCard(p)); });
@@ -2075,20 +2286,13 @@
         listEl.appendChild(li);
       });
 
-      // Build image slides
+      // Update image display
       var carousel = document.getElementById('modal-image-carousel');
-      // Remove any old slides
-      carousel.querySelectorAll('.modal-image-slide').forEach(function(el) { el.remove(); });
-
-      project.images.forEach(function(src, i) {
-        var img = document.createElement('img');
-        img.src = src;
-        img.alt = project.title + ' — image ' + (i + 1);
-        img.className = 'modal-image-slide' + (i === 0 ? ' active' : '');
-        img.loading = 'lazy';
-        // Insert before the buttons (first children)
-        carousel.insertBefore(img, carousel.firstChild);
-      });
+      carousel.style.background = '#d9d8d6';
+      var displayImg = document.getElementById('modal-image-display');
+      displayImg.src = project.images[0];
+      displayImg.alt = project.title + ' — image 1';
+      displayImg.loading = 'lazy';
 
       // Build dots
       var dotsEl = document.getElementById('modal-img-dots');
@@ -2117,9 +2321,9 @@
       if (!currentProject) return;
       var count = currentProject.images.length;
       currentImgIndex = ((idx % count) + count) % count;
-      document.querySelectorAll('.modal-image-slide').forEach(function(slide, i) {
-        slide.classList.toggle('active', i === currentImgIndex);
-      });
+      var displayImg = document.getElementById('modal-image-display');
+      displayImg.src = currentProject.images[currentImgIndex];
+      displayImg.alt = currentProject.title + ' — image ' + (currentImgIndex + 1);
       document.querySelectorAll('.modal-img-dot').forEach(function(dot, i) {
         dot.classList.toggle('active', i === currentImgIndex);
       });
