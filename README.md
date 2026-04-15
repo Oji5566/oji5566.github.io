@@ -1,3 +1,1 @@
-* # oji5566.github.io
-
-* oji5566.github.io
+# [oji5566.github.io](https://oji5566.github.io)
