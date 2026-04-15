@@ -158,14 +158,17 @@
        ANIMATE ON SCROLL
     =========================== */
     .animate-on-scroll {
+      --scroll-translate-x: 0px;
+      --scroll-translate-y-hidden: 40px;
+      --scroll-translate-y-visible: 0px;
       opacity: 0;
-      transform: translateY(40px);
+      transform: translateX(var(--scroll-translate-x)) translateY(var(--scroll-translate-y-hidden));
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
 
     .animate-on-scroll.visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateX(var(--scroll-translate-x)) translateY(var(--scroll-translate-y-visible));
     }
 
     /* ===========================
@@ -1542,6 +1545,7 @@
       display: flex;
       align-items: center;
       gap: 72px;
+      --scroll-translate-x: 10%;
     }
 
     .about-image-col {
@@ -1610,27 +1614,6 @@
       display: none !important;
     }
 
-    @media (max-width: 860px) {
-      .about-container {
-        flex-direction: column;
-        gap: 36px;
-        text-align: center;
-      }
-
-      .about-image-col {
-        width: min(62vw, 320px);
-      }
-
-      .about-greeting {
-        font-size: clamp(3rem, 12vw, 4.6rem);
-      }
-
-      .about-subheading {
-        margin: 0 auto;
-      }
-    }
-
-
     /* ===========================
        RESPONSIVE
     =========================== */
@@ -1648,13 +1631,17 @@
       #home { padding: 138px 28px 84px; flex-direction: column; }
       #works .section-heading { padding-left: 28px; padding-right: 28px; }
       .carousel-controls { padding-right: 28px; }
-      .about-container { flex-direction: column; gap: 44px; text-align: center; }
+      .about-container { flex-direction: column; gap: 60px; text-align: center; --scroll-translate-x: 0px; }
+      .about-image-col { width: min(62vw, 320px); }
+      .about-greeting { font-size: clamp(3rem, 12vw, 4.6rem); }
+      .about-subheading { margin: 0 auto; }
       .profile-placeholder { width: 250px; height: 333px; margin: 0 auto; }
       .profile-section-grid { grid-template-columns: 1fr; gap: 30px; }
-      .profile-copy { justify-content: flex-start; }
-      .profile-copy-inner { left: 0; }
-      .profile-copy-inner { margin-left: 0; }
-      .education-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+      .profile-section-grid > div:first-child { display: none; }
+      .profile-copy { justify-content: center; }
+      .profile-copy-inner { left: 0; margin-left: 0; text-align: center; }
+      .profile-qualities { align-items: center; }
+      .education-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; gap: 29px; }
       .skills-grid { max-width: 900px; grid-template-columns: repeat(4, minmax(140px, 1fr)); gap: 24px; }
     }
 
@@ -1677,6 +1664,44 @@
       #home { padding: 126px 20px 76px; }
       #works .section-heading { padding-left: 20px; padding-right: 20px; }
       .carousel-controls { padding-right: 20px; justify-content: center; }
+
+      .education-grid {
+        max-width: min(360px, calc(100vw - 40px));
+        gap: 17px;
+      }
+      .edu-card {
+        border-radius: 18px;
+      }
+      .edu-card-image {
+        height: 140px;
+        padding: 12px;
+      }
+      .edu-card-body {
+        padding: 16px 16px 18px;
+      }
+      .edu-uni {
+        font-size: 0.92rem;
+        line-height: 1.3;
+        margin-bottom: 5px;
+      }
+      .edu-degree {
+        font-size: 0.76rem;
+        line-height: 1.4;
+        margin-bottom: 10px;
+      }
+      .edu-desc {
+        font-size: 0.8rem;
+        line-height: 1.5;
+      }
+      .edu-points {
+        gap: 6px;
+      }
+      .edu-points li {
+        font-size: 0.8rem;
+        line-height: 1.48;
+        padding-left: 12px;
+      }
+
       .skills-grid { max-width: 100%; grid-template-columns: repeat(2, minmax(112px, 1fr)); gap: 14px; }
       .skill-icon { border-radius: 15px; }
       .skill-icon-body { min-height: 68px; padding: 10px 11px 12px; }
@@ -1711,7 +1736,7 @@
       <div class="about-container animate-on-scroll">
         <div class="about-image-col">
           <div class="profile-placeholder">
-            <img src="Image1.png" alt="Profile picture">
+            <img src="hero.png" alt="Profile picture">
           </div>
         </div>
         <div class="about-content-col">
