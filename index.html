@@ -758,6 +758,8 @@
       font-size: clamp(1.5rem, 2.2vw, 2.15rem);
       line-height: 1;
       color: var(--text-2);
+      /* Pull the eyebrow up so it tucks under the section heading
+         (whose own bottom margin is 62px) without forcing a wider gap. */
       margin: -28px 0 44px;
       text-align: left;
       letter-spacing: -0.005em;
@@ -2907,8 +2909,7 @@
         var replay = function() {
           if (!card.classList.contains('is-visible')) return;
           card.classList.remove('is-visible');
-          // Force a reflow so the animation restarts
-          // eslint-disable-next-line no-unused-expressions
+          // Force a browser reflow so the keyframe animations restart from frame 0
           void card.offsetWidth;
           card.classList.add('is-visible');
         };
