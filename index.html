@@ -743,6 +743,295 @@
       max-width: 46ch;
     }
 
+    /* ---------------------------
+       PROFILE — Concept 6 triptych
+       (three abstract compositions, one per quality)
+    --------------------------- */
+    .profile-shell {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .profile-eyebrow {
+      font-family: 'Radley', serif;
+      font-style: italic;
+      font-size: clamp(1.5rem, 2.2vw, 2.15rem);
+      line-height: 1;
+      color: var(--text-2);
+      /* Pull the eyebrow up so it tucks under the section heading
+         (whose own bottom margin is 62px) without forcing a wider gap. */
+      margin: -28px 0 44px;
+      text-align: left;
+      letter-spacing: -0.005em;
+    }
+
+    .profile-triptych {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .profile-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      text-align: left;
+      background: var(--surface-2);
+      border: 1px solid var(--stroke-1);
+      border-radius: 22px;
+      padding: 26px 26px 30px;
+      cursor: pointer;
+      font: inherit;
+      color: inherit;
+      overflow: hidden;
+      transition:
+        transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+        box-shadow 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+        border-color 0.3s ease,
+        background 0.3s ease;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.02);
+    }
+
+    .profile-card:hover,
+    .profile-card:focus-visible {
+      transform: translateY(-4px);
+      border-color: var(--stroke-2);
+      background: var(--surface-1);
+      box-shadow: var(--shadow-2);
+    }
+
+    .profile-card:focus-visible {
+      outline: 2px solid rgba(0,0,0,0.24);
+      outline-offset: 4px;
+    }
+
+    .profile-card-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+
+    .profile-card-num::after {
+      content: '';
+      display: inline-block;
+      width: 22px;
+      height: 1px;
+      background: var(--stroke-2);
+      vertical-align: middle;
+      margin-left: 10px;
+      transform: translateY(-2px);
+    }
+
+    .profile-card-art {
+      position: relative;
+      flex: 1 1 auto;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-card-art svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      overflow: visible;
+    }
+
+    .profile-card-caption {
+      margin-top: 26px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .profile-card-caption .profile-quality {
+      font-size: clamp(2rem, 2.8vw, 2.8rem);
+      padding-bottom: 6px;
+      transition: transform 0.3s ease;
+    }
+
+    .profile-card:hover .profile-card-caption .profile-quality {
+      transform: translateX(2px);
+    }
+
+    .profile-card-more {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      padding-bottom: 12px;
+      white-space: nowrap;
+      opacity: 0.55;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .profile-card:hover .profile-card-more,
+    .profile-card:focus-visible .profile-card-more {
+      opacity: 1;
+      transform: translateX(2px);
+    }
+
+    /* Art — common stroke styling */
+    .profile-art-ink {
+      stroke: #111111;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* --- Q1 / Curious — expanding spiral (orange) --- */
+    .profile-art-spiral {
+      stroke-width: 1.4;
+      stroke-dasharray: 720;
+      stroke-dashoffset: 720;
+    }
+    .profile-art-spiral-dot {
+      fill: #f39a45;
+    }
+    .profile-art-spiral-ring {
+      fill: none;
+      stroke: rgba(243,154,69,0.45);
+      stroke-width: 1;
+      stroke-dasharray: 2 4;
+      transform-origin: 120px 80px;
+      opacity: 0;
+    }
+    .profile-card.is-visible .profile-art-spiral {
+      animation: spiral-draw 1.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    }
+    .profile-card.is-visible .profile-art-spiral-ring {
+      animation: spiral-ring 2.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+    .profile-card.is-visible .profile-art-spiral-dot {
+      animation: dot-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 1.4s both;
+    }
+    @keyframes spiral-draw {
+      from { stroke-dashoffset: 720; }
+      to   { stroke-dashoffset: 0; }
+    }
+    @keyframes spiral-ring {
+      0%   { opacity: 0; transform: scale(0.6); }
+      60%  { opacity: 1; }
+      100% { opacity: 0.7; transform: scale(1); }
+    }
+    @keyframes dot-pop {
+      0%   { transform: scale(0); transform-origin: 120px 80px; }
+      100% { transform: scale(1); transform-origin: 120px 80px; }
+    }
+
+    /* --- Q2 / Driven — leaning bars (cyan) --- */
+    .profile-art-bars-baseline {
+      stroke: #111111;
+      stroke-width: 1;
+    }
+    .profile-art-bar {
+      transform-origin: bottom center;
+      transform: scaleY(0);
+    }
+    .profile-art-bar.is-fill { fill: #4cc7e8; }
+    .profile-art-bar.is-stroke { fill: none; stroke: #111111; stroke-width: 1.2; }
+    .profile-card.is-visible .profile-art-bar {
+      animation: bar-grow 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+    .profile-card.is-visible .profile-art-bar:nth-child(2) { animation-delay: 0.10s; }
+    .profile-card.is-visible .profile-art-bar:nth-child(3) { animation-delay: 0.20s; }
+    .profile-card.is-visible .profile-art-bar:nth-child(4) { animation-delay: 0.30s; }
+    .profile-card.is-visible .profile-art-bar:nth-child(5) { animation-delay: 0.40s; }
+    .profile-card.is-visible .profile-art-bar:nth-child(6) { animation-delay: 0.50s; }
+    @keyframes bar-grow {
+      from { transform: scaleY(0); }
+      to   { transform: scaleY(1); }
+    }
+    .profile-art-bars-arrow {
+      stroke: #111111;
+      stroke-width: 1.2;
+      fill: none;
+      stroke-dasharray: 60;
+      stroke-dashoffset: 60;
+    }
+    .profile-card.is-visible .profile-art-bars-arrow {
+      animation: arrow-draw 0.6s ease 0.65s forwards;
+    }
+    @keyframes arrow-draw {
+      to { stroke-dashoffset: 0; }
+    }
+
+    /* --- Q3 / Creative — Bauhaus arc / dot / line (green) --- */
+    .profile-art-arc {
+      fill: #7fb53b;
+      transform-origin: 70px 110px;
+      transform: scale(0);
+    }
+    .profile-art-circle {
+      fill: #111111;
+      transform-origin: 175px 60px;
+      transform: scale(0);
+    }
+    .profile-art-line {
+      stroke: #111111;
+      stroke-width: 1.4;
+      fill: none;
+      stroke-dasharray: 220;
+      stroke-dashoffset: 220;
+    }
+    .profile-art-square {
+      fill: none;
+      stroke: rgba(127,181,59,0.6);
+      stroke-width: 1;
+      transform-origin: 195px 122px;
+      transform: rotate(-12deg) scale(0);
+    }
+    .profile-card.is-visible .profile-art-arc {
+      animation: shape-pop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s forwards;
+    }
+    .profile-card.is-visible .profile-art-circle {
+      animation: shape-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.55s forwards;
+    }
+    .profile-card.is-visible .profile-art-line {
+      animation: line-draw 0.9s cubic-bezier(0.65, 0, 0.35, 1) 0.3s forwards;
+    }
+    .profile-card.is-visible .profile-art-square {
+      animation: square-in 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.85s forwards;
+    }
+    @keyframes shape-pop {
+      to { transform: scale(1); }
+    }
+    @keyframes line-draw {
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes square-in {
+      to { transform: rotate(-12deg) scale(1); }
+    }
+
+    /* Reduced motion: render compositions in their final state, no animation */
+    @media (prefers-reduced-motion: reduce) {
+      .profile-card,
+      .profile-card-caption .profile-quality,
+      .profile-card-more {
+        transition: none;
+      }
+      .profile-art-spiral { stroke-dashoffset: 0; animation: none !important; }
+      .profile-art-spiral-ring { opacity: 0.7; animation: none !important; }
+      .profile-art-spiral-dot { animation: none !important; }
+      .profile-art-bar { transform: scaleY(1); animation: none !important; }
+      .profile-art-bars-arrow { stroke-dashoffset: 0; animation: none !important; }
+      .profile-art-arc,
+      .profile-art-circle { transform: scale(1); animation: none !important; }
+      .profile-art-line { stroke-dashoffset: 0; animation: none !important; }
+      .profile-art-square { transform: rotate(-12deg) scale(1); animation: none !important; }
+    }
+
 
     /* ===========================
        EDUCATION SECTION
@@ -1641,6 +1930,18 @@
       .profile-copy { justify-content: center; }
       .profile-copy-inner { left: 0; margin-left: 0; text-align: center; }
       .profile-qualities { align-items: center; }
+      /* Triptych — collapse to single column on tablet/mobile */
+      .profile-eyebrow { text-align: center; margin: -8px 0 36px; }
+      .profile-triptych {
+        grid-template-columns: 1fr;
+        max-width: min(480px, calc(100vw - 56px));
+        margin: 0 auto;
+        gap: 22px;
+      }
+      .profile-card { padding: 24px 24px 26px; }
+      .profile-card-art { aspect-ratio: 16 / 9; max-height: 180px; margin-top: 16px; }
+      .profile-card-caption { margin-top: 22px; }
+      .profile-card-caption .profile-quality { font-size: clamp(2.2rem, 8vw, 2.8rem); }
       .education-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; gap: 29px; }
       .skills-grid { max-width: 900px; grid-template-columns: repeat(4, minmax(140px, 1fr)); gap: 24px; }
     }
@@ -1669,6 +1970,14 @@
         max-width: min(360px, calc(100vw - 40px));
         gap: 17px;
       }
+      .profile-triptych {
+        max-width: min(360px, calc(100vw - 40px));
+        gap: 18px;
+      }
+      .profile-card { padding: 22px 22px 24px; border-radius: 18px; }
+      .profile-card-art { aspect-ratio: 16 / 10; max-height: 160px; margin-top: 14px; }
+      .profile-card-caption { margin-top: 18px; }
+      .profile-eyebrow { margin-bottom: 28px; }
       .edu-card {
         border-radius: 18px;
       }
@@ -1753,17 +2062,63 @@
 
   <section id="profile">
     <h2 class="section-heading animate-on-scroll">A little bit about me</h2>
-    <div class="profile-section-grid animate-on-scroll">
-      <div></div>
-      <div class="profile-copy">
-        <div class="profile-copy-inner">
-          <div class="profile-lead">I am...</div>
-          <div class="profile-qualities">
-            <button class="profile-quality quality-trigger orange" type="button" data-quality="quality1">Quality 1,</button>
-            <button class="profile-quality quality-trigger cyan" type="button" data-quality="quality2">Quality 2,</button>
-            <button class="profile-quality quality-trigger green" type="button" data-quality="quality3">Quality 3.</button>
+    <div class="profile-shell">
+      <div class="profile-eyebrow animate-on-scroll">I am&hellip;</div>
+      <div class="profile-triptych animate-on-scroll">
+
+        <button class="profile-card quality-trigger" type="button" data-quality="quality1" aria-label="Quality 1 — read more">
+          <span class="profile-card-num">01</span>
+          <div class="profile-card-art" aria-hidden="true">
+            <svg viewBox="0 0 240 160" preserveAspectRatio="xMidYMid meet" focusable="false">
+              <circle class="profile-art-spiral-ring" cx="120" cy="80" r="62"/>
+              <path class="profile-art-ink profile-art-spiral" d="M120,80 Q124,77 124,80 Q124,85 119,85 Q113,85 113,79 Q113,71 122,71 Q133,71 133,80 Q133,93 119,93 Q102,93 102,79 Q102,60 122,60 Q145,60 145,80 Q145,103 119,103 Q90,103 90,79 Q90,49 122,49 Q157,49 157,80 Q157,114 119,114 Q78,114 78,79 Q78,38 122,38"/>
+              <circle class="profile-art-spiral-dot" cx="120" cy="80" r="3.6"/>
+            </svg>
           </div>
-        </div>
+          <div class="profile-card-caption">
+            <span class="profile-quality orange">Quality 1,</span>
+            <span class="profile-card-more">read +</span>
+          </div>
+        </button>
+
+        <button class="profile-card quality-trigger" type="button" data-quality="quality2" aria-label="Quality 2 — read more">
+          <span class="profile-card-num">02</span>
+          <div class="profile-card-art" aria-hidden="true">
+            <svg viewBox="0 0 240 160" preserveAspectRatio="xMidYMid meet" focusable="false">
+              <g transform="skewX(-8)">
+                <rect class="profile-art-bar is-stroke" x="46" y="100" width="18" height="30" rx="2"/>
+                <rect class="profile-art-bar is-stroke" x="74" y="86"  width="18" height="44" rx="2"/>
+                <rect class="profile-art-bar is-fill"   x="102" y="70" width="18" height="60" rx="2"/>
+                <rect class="profile-art-bar is-stroke" x="130" y="54" width="18" height="76" rx="2"/>
+                <rect class="profile-art-bar is-fill"   x="158" y="38" width="18" height="92" rx="2"/>
+                <rect class="profile-art-bar is-stroke" x="186" y="22" width="18" height="108" rx="2"/>
+              </g>
+              <line class="profile-art-bars-baseline" x1="30" y1="134" x2="220" y2="134"/>
+              <path class="profile-art-bars-arrow" d="M44,140 L210,140 M204,135 L210,140 L204,145"/>
+            </svg>
+          </div>
+          <div class="profile-card-caption">
+            <span class="profile-quality cyan">Quality 2,</span>
+            <span class="profile-card-more">read +</span>
+          </div>
+        </button>
+
+        <button class="profile-card quality-trigger" type="button" data-quality="quality3" aria-label="Quality 3 — read more">
+          <span class="profile-card-num">03</span>
+          <div class="profile-card-art" aria-hidden="true">
+            <svg viewBox="0 0 240 160" preserveAspectRatio="xMidYMid meet" focusable="false">
+              <path class="profile-art-arc" d="M30,110 A40,40 0 0 1 110,110 Z"/>
+              <path class="profile-art-line" d="M40,30 L210,140"/>
+              <circle class="profile-art-circle" cx="175" cy="60" r="18"/>
+              <rect class="profile-art-square" x="170" y="100" width="40" height="40"/>
+            </svg>
+          </div>
+          <div class="profile-card-caption">
+            <span class="profile-quality green">Quality 3.</span>
+            <span class="profile-card-more">read +</span>
+          </div>
+        </button>
+
       </div>
     </div>
   </section>
@@ -2514,6 +2869,54 @@
     document.querySelectorAll('.animate-on-scroll').forEach(function(el) {
       scrollObserver.observe(el);
     });
+
+    /* ===========================
+       PROFILE TRIPTYCH
+       Trigger SVG composition animations on scroll-in;
+       replay on hover/focus (desktop only, respects reduced motion).
+    =========================== */
+    (function() {
+      var cards = document.querySelectorAll('.profile-card');
+      if (!cards.length) return;
+
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Reveal animation on first scroll-in
+      var cardObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            // Stagger across the three cards for a more deliberate entrance
+            var idx = Array.prototype.indexOf.call(cards, entry.target);
+            var delay = prefersReduced ? 0 : idx * 140;
+            setTimeout(function() {
+              entry.target.classList.add('is-visible');
+            }, delay);
+            cardObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.25 });
+
+      cards.forEach(function(card) {
+        cardObserver.observe(card);
+      });
+
+      // Replay on hover/focus — desktop with hover only, never when reduced motion
+      if (prefersReduced) return;
+      var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (!canHover) return;
+
+      cards.forEach(function(card) {
+        var replay = function() {
+          if (!card.classList.contains('is-visible')) return;
+          card.classList.remove('is-visible');
+          // Force a browser reflow so the keyframe animations restart from frame 0
+          void card.offsetWidth;
+          card.classList.add('is-visible');
+        };
+        card.addEventListener('mouseenter', replay);
+        card.addEventListener('focus', replay);
+      });
+    })();
   </script>
 </body>
 </html>
